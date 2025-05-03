@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<title>Soil Properties Calculator - Light Brown Theme</title>
+<style>
+  /* Light brown theme with modern style */
+  @import url('https://fonts.googleapis.com/css2?family=Lexend&display=swap');
+
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    font-family: 'Lexend', sans-serif;
+    background-color: #f1e4d3; /* light warm brown/beige */
+    color: #5a3e1b; /* dark brown text */
+    min-height: 600px;
+    max-width: 350px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  h1 {
+    font-weight: 700;
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 15px;
+    color: #7a5731;
+    text-shadow: 0 0 4px #c9b19c;
+  }
+
+  /* Container for calculators side by side */
+  #calculators-container {
+    display: flex;
+    gap: 15px;
+    overflow-x: auto;
+    padding-bottom: 10px;
+  }
+
+  /* Each calculator fieldset reduced width for side by side */
+  #calculators-container fieldset {
+    border: 2px solid #b7925e;
+    border-radius: 10px;
+    margin: 0; /* remove bottom margin, controlled by container gap */
+    padding: 15px;
+    background: rgba(183, 146, 94, 0.15);
+    min-width: 260px;
+    flex-shrink: 0;
+  }
+  legend {
+    padding: 0 10px;
+    font-weight: 700;
+    font-size: 18px;
+    color: #a97c45;
+    text-shadow: 0 0 3px #d9c8b3;
+  }
+  label {
+    display: block;
+    margin: 8px 0 3px;
+    font-weight: 600;
+    color: #6a4a1c;
+  }
+  input[type="number"] {
+    width: 100%;
+    padding: 6px 8px;
+    border: 1.5px solid #a37f43;
+    border-radius: 6px;
+    font-size: 16px;
+    color: #3c2710;
+    font-weight: 600;
+    background-color: #f8efe1;
+    transition: border-color 0.3s ease;
+  }
+  input[type="number"]:focus {
+    outline: none;
+    border-color: #d7ad56;
+    box-shadow: 0 0 6px #deb567;
+  }
+  button {
+    display: block;
+    width: 100%;
+    background-color: #b7925e;
+    border: none;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 18px;
+    color: #3c2710;
+    padding: 12px 0;
+    margin-top: 10px;
+    cursor: pointer;
+    box-shadow: 0 0 6px #b7925e;
+    transition: background-color 0.3s ease;
+  }
+  button:hover {
+    background-color: #9d7b42;
+  }
+  .result {
+    margin-top: 8px;
+    font-weight: 700;
+    font-size: 17px;
+    color: #875f2b;
+    text-shadow: 0 0 2px #c7b895;
+    min-height: 1.5em;
+    word-wrap: break-word;
+  }
+
+  /* Scroll lock and layout for mobile */
+  @media (max-width: 380px) {
+    body {
+      padding: 15px 10px;
+      min-height: 600px;
+      max-width: 350px;
+    }
+    #calculators-container {
+      /* allow horizontal scroll on small widths */
+      gap: 12px;
+      padding-bottom: 12px;
+    }
+    #calculators-container fieldset {
+      min-width: 240px;
+    }
+  }
+
+  /* For extremely narrow screens, stack vertically */
+  @media (max-width: 260px) {
+    #calculators-container {
+      flex-direction: column;
+    }
+    #calculators-container fieldset {
+      min-width: 100%;
+      margin-bottom: 20px;
+    }
+  }
+</style>
+</head>
+<body>
+<h1>Soil Properties Calculator</h1>
+
+<form id="soil-form" novalidate>
+  <div id="calculators-container">
+    <!-- Porosity -->
+    <fieldset>
+      <legend>Porosity (Φ)</legend>
+      <label for="vp">Volume of Pores (Vp) in ml</label>
+      <input type="number" id="vp" name="vp" step="any" min="0" required placeholder="e.g. 20" />
+      <label for="vt">Total Volume (Vt) in ml</label>
+      <input type="number" id="vt" name="vt" step="any" min="0" required placeholder="e.g. 100" />
+      <button type="button" id="calc-porosity">Calculate Porosity (%)</button>
+      <div class="result" id="result-porosity"></div>
+    </fieldset>
+
+    <!-- Permeability -->
+    <fieldset>
+      <legend>Permeability (K)</legend>
+      <label for="q">Flow Quantity (Q) in ml</label>
+      <input type="number" id="q" name="q" step="any" min="0" required placeholder="e.g. 50" />
+      <label for="t">Measurement Time (t) in hours</label>
+      <input type="number" id="t" name="t" step="any" min="0" required placeholder="e.g. 2" />
+      <label for="l">Sample Thickness (L) in cm</label>
+      <input type="number" id="l" name="l" step="any" min="0" required placeholder="e.g. 5" />
+      <label for="h">Water Level Height (h) in cm</label>
+      <input type="number" id="h" name="h" step="any" min="0" required placeholder="e.g. 10" />
+      <label for="a-perm">Sample Surface Area (A) in cm²</label>
+      <input type="number" id="a-perm" name="a-perm" step="any" min="0" required placeholder="e.g. 20" />
+      <button type="button" id="calc-permeability">Calculate Permeability (cm/hour)</button>
+      <div class="result" id="result-permeability"></div>
+    </fieldset>
+
+    <!-- Electrical Conductivity -->
+    <fieldset>
+      <legend>Soil Electrical Conductivity (EC)</legend>
+      <label for="l-ec">Distance between electrodes (l) in cm</label>
+      <input type="number" id="l-ec" name="l-ec" step="any" min="0" required placeholder="e.g. 5" />
+      <label for="a-ec">Cross-sectional area (A) in cm²</label>
+      <input type="number" id="a-ec" name="a-ec" step="any" min="0" required placeholder="e.g. 10" />
+      <label for="r">Soil resistance (R) in ohm</label>
+      <input type="number" id="r" name="r" step="any" min="0" required placeholder="e.g. 100" />
+      <button type="button" id="calc-ec">Calculate EC</button>
+      <div class="result" id="result-ec"></div>
+    </fieldset>
+  </div>
+</form>
+
+<script>
+  // Calculate Porosity Φ (%) = (Vp / Vt) * 100
+  document.getElementById('calc-porosity').addEventListener('click', () => {
+    const vp = parseFloat(document.getElementById('vp').value);
+    const vt = parseFloat(document.getElementById('vt').value);
+    const resultEl = document.getElementById('result-porosity');
+
+    if (isNaN(vp) || isNaN(vt) || vt === 0 || vp < 0 || vt < 0) {
+      resultEl.textContent = 'Please enter valid non-negative numbers and ensure Total Volume > 0.';
+      return;
+    }
+    const porosity = (vp / vt) * 100;
+    resultEl.textContent = `Porosity (Φ): ${porosity.toFixed(2)}%`;
+  });
+
+  // Calculate Permeability K = (Q/t) * (L/h) * (1/A)
+  document.getElementById('calc-permeability').addEventListener('click', () => {
+    const q = parseFloat(document.getElementById('q').value);
+    const t = parseFloat(document.getElementById('t').value);
+    const l = parseFloat(document.getElementById('l').value);
+    const h = parseFloat(document.getElementById('h').value);
+    const a = parseFloat(document.getElementById('a-perm').value);
+    const resultEl = document.getElementById('result-permeability');
+
+    if ([q,t,l,h,a].some(x => isNaN(x) || x <= 0)) {
+      resultEl.textContent = 'Please enter valid positive numbers for all fields.';
+      return;
+    }
+
+    // K = (Q/t) * (L/h) * (1/A)
+    const permeability = (q / t) * (l / h) * (1 / a);
+    resultEl.textContent = `Permeability (K): ${permeability.toFixed(4)} cm/hour`;
+  });
+
+  // Calculate Electrical Conductivity: EC = (1/R) * (l / A)
+  document.getElementById('calc-ec').addEventListener('click', () => {
+    const l = parseFloat(document.getElementById('l-ec').value);
+    const a = parseFloat(document.getElementById('a-ec').value);
+    const r = parseFloat(document.getElementById('r').value);
+    const resultEl = document.getElementById('result-ec');
+
+    if ([l,a,r].some(x => isNaN(x) || x <= 0)) {
+      resultEl.textContent = 'Please enter valid positive numbers for all fields.';
+      return;
+    }
+
+    // EC = (1/R) * (l / A)
+    const ec = (1 / r) * (l / a);
+    resultEl.textContent = `Electrical Conductivity (EC): ${ec.toFixed(6)} (unit depends on input)`;
+  });
+</script>
+</body>
+</html>
