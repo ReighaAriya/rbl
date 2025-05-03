@@ -153,13 +153,13 @@
     <!-- Porositas -->
     <fieldset>
       <legend>Porositas (Φ)</legend>
-      <label for="vp">Volume Sampel (Vp) dalam ml</label>
-      <input type="number" id="vp" name="vp" step="any" min="0" required placeholder="misal: 20" />
+      <label for="weight">Berat Sampel (gram)</label>
+      <input type="number" id="weight" name="weight" step="any" min="0" required placeholder="misal: 20" />
       <label for="vt">Volume Total (Vt) dalam ml</label>
       <input type="number" id="vt" name="vt" step="any" min="0" required placeholder="misal: 100" />
       <button type="button" id="calc-porosity">Kalkulasi Porositas (%)</button>
       <div class="result" id="result-porosity"></div>
-      <div class="formula">Rumus: Φ = (Vp / Vt) * 100</div>
+      <div class="formula">Rumus: Φ = (Vp / Vt) * 100, di mana Vp = Berat Sampel (gram)</div>
     </fieldset>
 
     <!-- Permeabilitas -->
@@ -179,35 +179,21 @@
       <div class="result" id="result-permeability"></div>
       <div class="formula">Rumus: K = (Q / t) * (L / h) * (1 / A)</div>
     </fieldset>
-
-    <!-- Konduktivitas Listrik -->
-    <fieldset>
-      <legend>Konduktivitas Listrik Tanah (EC)</legend>
-      <label for="l-ec">Jarak Antar Elektroda (l) dalam cm</label>
-      <input type="number" id="l-ec" name="l-ec" step="any" min="0" required placeholder="misal: 5" />
-      <label for="a-ec">Luas Penampang Tanah Antar Elektroda (A) dalam cm²</label>
-      <input type="number" id="a-ec" name="a-ec" step="any" min="0" required placeholder="misal: 10" />
-      <label for="r">Resistensi Tanah (R) dalam ohm</label>
-      <input type="number" id="r" name="r" step="any" min="0" required placeholder="misal: 100" />
-      <button type="button" id="calc-ec">Kalkulasi EC</button>
-      <div class="result" id="result-ec"></div>
-      <div class="formula">Rumus: EC = (1 / R) * (l / A)</div>
-    </fieldset>
   </div>
 </form>
 
 <script>
-  // Kalkulasi Porositas Φ (%) = (Vp / Vt) * 100
+  // Kalkulasi Porositas Φ (%) = (Vp / Vt) * 100, dengan Vp = Berat Sampel dalam gram
   document.getElementById('calc-porosity').addEventListener('click', () => {
-    const vp = parseFloat(document.getElementById('vp').value);
-    const vt = parseFloat(document.getElementById('vt').value);
+    const weight = parseFloat(document.getElementById('weight').value);  // Berat Sampel dalam gram
+    const vt = parseFloat(document.getElementById('vt').value);  // Volume Total dalam ml
     const resultEl = document.getElementById('result-porosity');
 
-    if (isNaN(vp) || isNaN(vt) || vt === 0 || vp < 0 || vt < 0) {
+    if (isNaN(weight) || isNaN(vt) || vt === 0 || weight < 0 || vt < 0) {
       resultEl.textContent = 'Masukkan angka yang valid dan pastikan Volume Total > 0.';
       return;
     }
-    const porosity = (vp / vt) * 100;
+    const porosity = (weight / vt) * 100;  // Menggunakan berat sampel sebagai volume
     resultEl.textContent = `Porositas (Φ): ${porosity.toFixed(2)}%`;
   });
 
@@ -228,23 +214,6 @@
     // K = (Q/t) * (L/h) * (1/A)
     const permeability = (q / t) * (l / h) * (1 / a);
     resultEl.textContent = `Permeabilitas (K): ${permeability.toFixed(4)} cm/jam`;
-  });
-
-  // Kalkulasi Konduktivitas Listrik: EC = (1/R) * (l / A)
-  document.getElementById('calc-ec').addEventListener('click', () => {
-    const l = parseFloat(document.getElementById('l-ec').value);
-    const a = parseFloat(document.getElementById('a-ec').value);
-    const r = parseFloat(document.getElementById('r').value);
-    const resultEl = document.getElementById('result-ec');
-
-    if ([l,a,r].some(x => isNaN(x) || x <= 0)) {
-      resultEl.textContent = 'Masukkan angka positif yang valid untuk semua kolom.';
-      return;
-    }
-
-    // EC = (1/R) * (l / A)
-    const ec = (1 / r) * (l / a);
-    resultEl.textContent = `Konduktivitas Listrik (EC): ${ec.toFixed(6)} (satuan tergantung input)`;
   });
 </script>
 </body>
