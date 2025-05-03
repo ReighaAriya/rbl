@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-<title>Soil Properties Calculator - Light Brown Theme</title>
+<title>Soil Properties Calculator</title>
 <style>
   /* Light brown theme with modern style */
   @import url('https://fonts.googleapis.com/css2?family=Lexend&display=swap');
@@ -145,27 +145,27 @@
   <div id="calculators-container">
     <!-- Porosity -->
     <fieldset>
-      <legend>Porosity (Φ)</legend>
-      <label for="vp">Volume of Pores (Vp) in ml</label>
+      <legend>Porositas (Φ)</legend>
+      <label for="vp">Volume Sampel (Vp) dalam ml</label>
       <input type="number" id="vp" name="vp" step="any" min="0" required placeholder="e.g. 20" />
-      <label for="vt">Total Volume (Vt) in ml</label>
+      <label for="vt">Volume Total (Vt) dalam ml</label>
       <input type="number" id="vt" name="vt" step="any" min="0" required placeholder="e.g. 100" />
-      <button type="button" id="calc-porosity">Calculate Porosity (%)</button>
+      <button type="button" id="calc-porosity">Kalkulasi Porositas (%)</button>
       <div class="result" id="result-porosity"></div>
     </fieldset>
 
     <!-- Permeability -->
     <fieldset>
-      <legend>Permeability (K)</legend>
-      <label for="q">Flow Quantity (Q) in ml</label>
+      <legend>Permeabilitas (K)</legend>
+      <label for="q">Banyaknya air yang mengalir setiap pengukuran (Q) dalam ml</label>
       <input type="number" id="q" name="q" step="any" min="0" required placeholder="e.g. 50" />
-      <label for="t">Measurement Time (t) in hours</label>
+      <label for="t">Waktu Pengukuran (t) dalam jam</label>
       <input type="number" id="t" name="t" step="any" min="0" required placeholder="e.g. 2" />
-      <label for="l">Sample Thickness (L) in cm</label>
+      <label for="l">Tebal Sampel (L) dalam cm</label>
       <input type="number" id="l" name="l" step="any" min="0" required placeholder="e.g. 5" />
-      <label for="h">Water Level Height (h) in cm</label>
+      <label for="h">Tinggi Permukaan Air (h) dalam cm</label>
       <input type="number" id="h" name="h" step="any" min="0" required placeholder="e.g. 10" />
-      <label for="a-perm">Sample Surface Area (A) in cm²</label>
+      <label for="a-perm">Luas Permukaan Sampel (A) dalam cm²</label>
       <input type="number" id="a-perm" name="a-perm" step="any" min="0" required placeholder="e.g. 20" />
       <button type="button" id="calc-permeability">Calculate Permeability (cm/hour)</button>
       <div class="result" id="result-permeability"></div>
@@ -173,12 +173,12 @@
 
     <!-- Electrical Conductivity -->
     <fieldset>
-      <legend>Soil Electrical Conductivity (EC)</legend>
-      <label for="l-ec">Distance between electrodes (l) in cm</label>
+      <legend>Konduktivitas Listrik Tanah (EC)</legend>
+      <label for="l-ec">Jarak Antar Elektroda (l) dalam cm</label>
       <input type="number" id="l-ec" name="l-ec" step="any" min="0" required placeholder="e.g. 5" />
-      <label for="a-ec">Cross-sectional area (A) in cm²</label>
+      <label for="a-ec">Luas Penampang Tanah Antar Elektroda (A) dalam cm²</label>
       <input type="number" id="a-ec" name="a-ec" step="any" min="0" required placeholder="e.g. 10" />
-      <label for="r">Soil resistance (R) in ohm</label>
+      <label for="r">Resistensi Tanah (R) dalam ohm</label>
       <input type="number" id="r" name="r" step="any" min="0" required placeholder="e.g. 100" />
       <button type="button" id="calc-ec">Calculate EC</button>
       <div class="result" id="result-ec"></div>
