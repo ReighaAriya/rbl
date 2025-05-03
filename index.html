@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-<title>Soil Properties Calculator</title>
+<title>Kalkulator Sifat Tanah</title>
 <style>
-  /* Light brown theme with modern style */
+  /* Tema coklat muda dengan gaya modern */
   @import url('https://fonts.googleapis.com/css2?family=Lexend&display=swap');
 
   * {
@@ -14,8 +14,8 @@
   body {
     margin: 0;
     font-family: 'Lexend', sans-serif;
-    background-color: #f1e4d3; /* light warm brown/beige */
-    color: #5a3e1b; /* dark brown text */
+    background-color: #f1e4d3; /* coklat muda/beige */
+    color: #5a3e1b; /* teks coklat tua */
     min-height: 600px;
     max-width: 350px;
     margin-left: auto;
@@ -34,7 +34,7 @@
     text-shadow: 0 0 4px #c9b19c;
   }
 
-  /* Container for calculators side by side */
+  /* Kontainer kalkulator disamping */
   #calculators-container {
     display: flex;
     gap: 15px;
@@ -42,11 +42,11 @@
     padding-bottom: 10px;
   }
 
-  /* Each calculator fieldset reduced width for side by side */
+  /* Setiap kalkulator fieldset dengan lebar yang lebih kecil untuk disamping */
   #calculators-container fieldset {
     border: 2px solid #b7925e;
     border-radius: 10px;
-    margin: 0; /* remove bottom margin, controlled by container gap */
+    margin: 0; /* menghapus margin bawah, dikontrol oleh gap kontainer */
     padding: 15px;
     background: rgba(183, 146, 94, 0.15);
     min-width: 260px;
@@ -109,7 +109,14 @@
     word-wrap: break-word;
   }
 
-  /* Scroll lock and layout for mobile */
+  .formula {
+    margin-top: 8px;
+    font-size: 14px;
+    color: #6a4a1c;
+    font-style: italic;
+  }
+
+  /* Scroll lock dan tata letak untuk mobile */
   @media (max-width: 380px) {
     body {
       padding: 15px 10px;
@@ -117,7 +124,7 @@
       max-width: 350px;
     }
     #calculators-container {
-      /* allow horizontal scroll on small widths */
+      /* memungkinkan scroll horizontal di lebar kecil */
       gap: 12px;
       padding-bottom: 12px;
     }
@@ -126,7 +133,7 @@
     }
   }
 
-  /* For extremely narrow screens, stack vertically */
+  /* Untuk layar sangat sempit, stack secara vertikal */
   @media (max-width: 260px) {
     #calculators-container {
       flex-direction: column;
@@ -139,69 +146,72 @@
 </style>
 </head>
 <body>
-<h1>Soil Properties Calculator</h1>
+<h1>Kalkulator Sifat Tanah</h1>
 
 <form id="soil-form" novalidate>
   <div id="calculators-container">
-    <!-- Porosity -->
+    <!-- Porositas -->
     <fieldset>
       <legend>Porositas (Φ)</legend>
       <label for="vp">Volume Sampel (Vp) dalam ml</label>
-      <input type="number" id="vp" name="vp" step="any" min="0" required placeholder="e.g. 20" />
+      <input type="number" id="vp" name="vp" step="any" min="0" required placeholder="misal: 20" />
       <label for="vt">Volume Total (Vt) dalam ml</label>
-      <input type="number" id="vt" name="vt" step="any" min="0" required placeholder="e.g. 100" />
+      <input type="number" id="vt" name="vt" step="any" min="0" required placeholder="misal: 100" />
       <button type="button" id="calc-porosity">Kalkulasi Porositas (%)</button>
       <div class="result" id="result-porosity"></div>
+      <div class="formula">Rumus: Φ = (Vp / Vt) * 100</div>
     </fieldset>
 
-    <!-- Permeability -->
+    <!-- Permeabilitas -->
     <fieldset>
       <legend>Permeabilitas (K)</legend>
       <label for="q">Banyaknya air yang mengalir setiap pengukuran (Q) dalam ml</label>
-      <input type="number" id="q" name="q" step="any" min="0" required placeholder="e.g. 50" />
+      <input type="number" id="q" name="q" step="any" min="0" required placeholder="misal: 50" />
       <label for="t">Waktu Pengukuran (t) dalam jam</label>
-      <input type="number" id="t" name="t" step="any" min="0" required placeholder="e.g. 2" />
+      <input type="number" id="t" name="t" step="any" min="0" required placeholder="misal: 2" />
       <label for="l">Tebal Sampel (L) dalam cm</label>
-      <input type="number" id="l" name="l" step="any" min="0" required placeholder="e.g. 5" />
+      <input type="number" id="l" name="l" step="any" min="0" required placeholder="misal: 5" />
       <label for="h">Tinggi Permukaan Air (h) dalam cm</label>
-      <input type="number" id="h" name="h" step="any" min="0" required placeholder="e.g. 10" />
+      <input type="number" id="h" name="h" step="any" min="0" required placeholder="misal: 10" />
       <label for="a-perm">Luas Permukaan Sampel (A) dalam cm²</label>
-      <input type="number" id="a-perm" name="a-perm" step="any" min="0" required placeholder="e.g. 20" />
+      <input type="number" id="a-perm" name="a-perm" step="any" min="0" required placeholder="misal: 20" />
       <button type="button" id="calc-permeability">Kalkulasi Permeabilitas (cm/jam)</button>
       <div class="result" id="result-permeability"></div>
+      <div class="formula">Rumus: K = (Q / t) * (L / h) * (1 / A)</div>
     </fieldset>
 
-    <!-- Electrical Conductivity -->
+    <!-- Konduktivitas Listrik -->
     <fieldset>
       <legend>Konduktivitas Listrik Tanah (EC)</legend>
       <label for="l-ec">Jarak Antar Elektroda (l) dalam cm</label>
-      <input type="number" id="l-ec" name="l-ec" step="any" min="0" required placeholder="e.g. 5" />
+      <input type="number" id="l-ec" name="l-ec" step="any" min="0" required placeholder="misal: 5" />
       <label for="a-ec">Luas Penampang Tanah Antar Elektroda (A) dalam cm²</label>
-      <input type="number" id="a-ec" name="a-ec" step="any" min="0" required placeholder="e.g. 10" />
+      <input type="number" id="a-ec" name="a-ec" step="any" min="0" required placeholder="misal: 10" />
       <label for="r">Resistensi Tanah (R) dalam ohm</label>
-      <input type="number" id="r" name="r" step="any" min="0" required placeholder="e.g. 100" />
+      <input type="number" id="r" name="r" step="any" min="0" required placeholder="misal: 100" />
       <button type="button" id="calc-ec">Kalkulasi EC</button>
       <div class="result" id="result-ec"></div>
+      <div class="formula">Rumus: EC = (1 / R) * (l / A)</div>
     </fieldset>
   </div>
 </form>
 
 <script>
-  // Calculate Porosity Φ (%) = (Vp / Vt) * 100
+  // Kalkulasi Porositas Φ (%) = (Vp / Vt) * 100
   document.getElementById('calc-porosity').addEventListener('click', () => {
     const vp = parseFloat(document.getElementById('vp').value);
     const vt = parseFloat(document.getElementById('vt').value);
     const resultEl = document.getElementById('result-porosity');
 
     if (isNaN(vp) || isNaN(vt) || vt === 0 || vp < 0 || vt < 0) {
-      resultEl.textContent = 'Please enter valid non-negative numbers and ensure Total Volume > 0.';
+      resultEl.textContent = 'Masukkan angka yang valid dan pastikan Volume Total > 0.';
       return;
     }
     const porosity = (vp / vt) * 100;
-    resultEl.textContent = `Porosity (Φ): ${porosity.toFixed(2)}%`;
+    resultEl.textContent = `Porositas (Φ): ${porosity.toFixed(2)}%`;
   });
 
-  // Calculate Permeability K = (Q/t) * (L/h) * (1/A)
+  // Kalkulasi Permeabilitas K = (Q/t) * (L/h) * (1/A)
   document.getElementById('calc-permeability').addEventListener('click', () => {
     const q = parseFloat(document.getElementById('q').value);
     const t = parseFloat(document.getElementById('t').value);
@@ -211,16 +221,16 @@
     const resultEl = document.getElementById('result-permeability');
 
     if ([q,t,l,h,a].some(x => isNaN(x) || x <= 0)) {
-      resultEl.textContent = 'Please enter valid positive numbers for all fields.';
+      resultEl.textContent = 'Masukkan angka positif yang valid untuk semua kolom.';
       return;
     }
 
     // K = (Q/t) * (L/h) * (1/A)
     const permeability = (q / t) * (l / h) * (1 / a);
-    resultEl.textContent = `Permeability (K): ${permeability.toFixed(4)} cm/hour`;
+    resultEl.textContent = `Permeabilitas (K): ${permeability.toFixed(4)} cm/jam`;
   });
 
-  // Calculate Electrical Conductivity: EC = (1/R) * (l / A)
+  // Kalkulasi Konduktivitas Listrik: EC = (1/R) * (l / A)
   document.getElementById('calc-ec').addEventListener('click', () => {
     const l = parseFloat(document.getElementById('l-ec').value);
     const a = parseFloat(document.getElementById('a-ec').value);
@@ -228,13 +238,13 @@
     const resultEl = document.getElementById('result-ec');
 
     if ([l,a,r].some(x => isNaN(x) || x <= 0)) {
-      resultEl.textContent = 'Please enter valid positive numbers for all fields.';
+      resultEl.textContent = 'Masukkan angka positif yang valid untuk semua kolom.';
       return;
     }
 
     // EC = (1/R) * (l / A)
     const ec = (1 / r) * (l / a);
-    resultEl.textContent = `Electrical Conductivity (EC): ${ec.toFixed(6)} (unit depends on input)`;
+    resultEl.textContent = `Konduktivitas Listrik (EC): ${ec.toFixed(6)} (satuan tergantung input)`;
   });
 </script>
 </body>
